@@ -22,8 +22,8 @@
 minetest.register_craft({
 	output = "nether:brick 4",
 	recipe = {
-		{"nether:rack", "nether:rack"},
-		{"nether:rack", "nether:rack"},
+		{"nether:rack_new", "nether:rack_new"},
+		{"nether:rack_new", "nether:rack_new"},
 	}
 })
 

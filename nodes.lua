@@ -171,9 +171,9 @@ end
 
 -- Nether nodes
 
-minetest.register_node("nether:rack", {
+minetest.register_node("nether:rack_new", {
 	description = S("Netherrack"),
-	tiles = {"nether_rack.png"},
+	tiles = {"nether_rack_new.png"},
 	is_ground_content = true,
 	-- setting workable_with_nether_tools reduces the wear on nether:pick_nether when mining this node
 	groups = {cracky = 3, level = 2, workable_with_nether_tools = 3},
@@ -315,19 +315,19 @@ stairs.register_stair_and_slab( -- this function also registers inner and outer 
 
 stairs.register_stair(
 	"netherrack",
-	"nether:rack",
+	"nether:rack_new",
 	{cracky = 2, level = 2},
-	{"nether_rack.png"},
+	{"nether_rack_new.png"},
 	S("Netherrack stair"),
-	minetest.registered_nodes["nether:rack"].sounds
+	minetest.registered_nodes["nether:rack_new"].sounds
 )
 stairs.register_slab( -- register a slab without adding inner and outer stairs
 	"netherrack",
-	"nether:rack",
+	"nether:rack_new",
 	{cracky = 2, level = 2},
-	{"nether_rack.png"},
+	{"nether_rack_new.png"},
 	S("Deep Netherrack slab"),
-	minetest.registered_nodes["nether:rack"].sounds
+	minetest.registered_nodes["nether:rack_new"].sounds
 )
 
 stairs.register_stair(
@@ -349,7 +349,7 @@ stairs.register_slab( -- register a slab without adding inner and outer stairs
 
 -- Connecting walls
 if minetest.get_modpath("walls") and minetest.global_exists("walls") and walls.register ~= nil then
-	walls.register("nether:rack_wall",      "A Netherrack wall",      "nether_rack.png",      "nether:rack",      minetest.registered_nodes["nether:rack"].sounds)
+	walls.register("nether:rack_wall",      "A Netherrack wall",      "nether_rack_new.png",      "nether:rack_new",      minetest.registered_nodes["nether:rack_new"].sounds)
 	walls.register("nether:rack_deep_wall", "A Deep Netherrack wall", "nether_rack_deep.png", "nether:rack_deep", minetest.registered_nodes["nether:rack_deep"].sounds)
 end
 
@@ -859,7 +859,7 @@ minetest.register_node("nether:fumarole", {
 	description=S("Fumarolic Chimney"),
 	_doc_items_longdesc = S("A vent in the earth emitting steam and gas"),
 	_doc_items_usagehelp = S("Can be repurposed to provide puffs of smoke in a chimney"),
-	tiles = {"nether_rack.png"},
+	tiles = {"nether_rack_new.png"},
 	on_timer = fumarole_onTimer,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		fumarole_onTimer(pos, 1)
@@ -885,7 +885,7 @@ minetest.register_node("nether:fumarole_slab", {
 	description=S("Fumarolic Chimney Slab"),
 	_doc_items_longdesc = S("A vent in the earth emitting steam and gas"),
 	_doc_items_usagehelp = S("Can be repurposed to provide puffs of smoke in a chimney"),
-	tiles = {"nether_rack.png"},
+	tiles = {"nether_rack_new.png"},
 	is_ground_content = true,
 	on_timer = fumarole_onTimer,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
@@ -910,7 +910,7 @@ minetest.register_node("nether:fumarole_slab", {
 
 minetest.register_node("nether:fumarole_corner", {
 	description=S("Fumarolic Chimney Corner"),
-	tiles = {"nether_rack.png"},
+	tiles = {"nether_rack_new.png"},
 	is_ground_content = true,
 	groups = {cracky = 3, level = 2, fumarole=1},
 	paramtype = "light",

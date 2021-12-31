@@ -94,7 +94,7 @@ local c_water_flowing = minetest.get_content_id("default:water_flowing")
 local c_glowstone = minetest.get_content_id("nether:glowstone")
 local c_nethersand = minetest.get_content_id("nether:sand")
 local c_netherbrick = minetest.get_content_id("nether:brick")
-local c_netherrack = minetest.get_content_id("nether:rack")
+local c_netherrack = minetest.get_content_id("nether:rack_new")
 
 
 -- On-generated function
