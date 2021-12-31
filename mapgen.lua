@@ -290,9 +290,6 @@ local c_bedrock          = minetest.get_content_id("nether:bedrock")
 
 
 
-
-
-
 local yblmin = NETHER_FLOOR   + BLEND * 2
 local yblmax = NETHER_CEILING - BLEND * 2
 -- At both the top and bottom of the Nether, as set by NETHER_CEILING and NETHER_FLOOR,
@@ -331,6 +328,7 @@ local tunnelCandidate_count = 0
 local tunnel_count = 0
 local total_chunk_count = 0
 local function on_generated(minp, maxp, seed)
+
 	if minp.y > NETHER_CEILING or maxp.y < NETHER_FLOOR then
 		return
 	end
@@ -381,6 +379,7 @@ local function on_generated(minp, maxp, seed)
 			for x = x0, x1 do
 
 				local cave_noise = nvals_cave[ni]
+
 				if y == NETHER_CEILING then
 					data[vi] = c_bedrock
 				elseif cave_noise > tcave then
