@@ -23,7 +23,7 @@ local S = nether.get_translator
 
 -- Portal/wormhole nodes
 
-nether.register_wormhole_node("nether:portal", {
+nether.register_wormhole_node("nether:portal_new", {
 	description = S("Nether Portal"),
 	post_effect_color = {
 		-- post_effect_color can't be changed dynamically in Minetest like the portal colour is.

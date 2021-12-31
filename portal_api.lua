@@ -1973,7 +1973,7 @@ local wormhole_nodedef_default = {
 		"nether_transparent.png",
 		"nether_transparent.png",
 		{
-			name = "nether_portal.png",
+			name = "nether_portal_new.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,
@@ -1982,7 +1982,7 @@ local wormhole_nodedef_default = {
 			},
 		},
 		{
-			name = "nether_portal.png",
+			name = "nether_portal_new.png",
 			animation = {
 				type = "vertical_frames",
 				aspect_w = 16,

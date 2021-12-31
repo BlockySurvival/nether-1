@@ -75,7 +75,7 @@ SOFTWARE.
 ### [Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)](http://creativecommons.org/licenses/by-sa/3.0/)
  * `nether_glowstone`* (files starting with "nether_glowstone"): BlockMen
  * `nether_nether_ingot.png` & `nether_nether_lump.png`: color adjusted versions from "[default](https://github.com/minetest/minetest_game/tree/master/mods/default)" mod, originally by Gambit
- * `nether_portal.png`: [Extex101](https://github.com/Extex101), 2020
+ * `nether_portal_new.png`: [Extex101](https://github.com/Extex101), 2020
  * `nether_rack`* (files starting with "nether_rack"): Zeg9
  * `nether_tool_`* (files starting with "nether_tool_"): color adjusted versions from "[default](https://github.com/minetest/minetest_game/tree/master/mods/default)" mod, originals by BlockMen
 
