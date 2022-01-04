@@ -141,6 +141,7 @@ dofile(nether.path .. "/additional.lua")
 if nether.NETHER_REALM_ENABLED then
 	if nether.useBiomes then
 		dofile(nether.path .. "/mapgen.lua")
+		dofile(nether.path .. "/mapgen_new.lua")
 	else
 		dofile(nether.path .. "/mapgen_nobiomes.lua")
 	end

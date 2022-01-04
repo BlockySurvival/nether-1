@@ -328,7 +328,6 @@ local tunnelCandidate_count = 0
 local tunnel_count = 0
 local total_chunk_count = 0
 local function on_generated(minp, maxp, seed)
-
 	if minp.y > NETHER_CEILING or maxp.y < NETHER_FLOOR then
 		return
 	end

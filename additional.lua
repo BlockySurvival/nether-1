@@ -144,9 +144,126 @@ minetest.register_node("nether:gold_ore_blackstone", {
 	},
 })
 
+minetest.register_ore({
+	ore_type = "scatter",
+	ore = "nether:glowstone_deep",
+	wherein = { "nether:rack_deep" },
+	clust_scarcity = 9 * 9 * 9,
+	clust_num_ores = 2,
+	clust_size = 2,
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor
+})
+
+
+minetest.register_node("nether:small_tooth", {
+	description = S("Small Fosilised Tooth"),
+	drawtype = "mesh",
+	mesh = "small-tooth.obj",
+	tiles = {
+		"default_coral_skeleton.png",
+	},
+	-- use_texture_alpha = "blend",
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	groups = {cracky=2},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.185, -0.5, -0.333, 0.185, 0.5, 0.333},
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-0.185, -0.5, -0.333, 0.185, 0.5, 0.333},
+	},
+})
+
+
+minetest.register_node("nether:large_tooth", {
+	description = S("Large Fosilised Tooth"),
+	drawtype = "mesh",
+	mesh = "large-tooth.obj",
+	tiles = {
+		"default_coral_skeleton.png",
+	},
+	-- use_texture_alpha = "blend",
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	groups = {cracky=2},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.4, 0.25, 1.5, 0.4},
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.4, 0.25, 1.5, 0.4},
+	},
+})
+
+
+-- Lava cools into netherrack
+
+if minetest.settings:get_bool("enable_lavacooling") ~= false then
+	minetest.register_abm({
+		label = "Nether Lava cooling",
+		nodenames = {"default:lava_flowing"},
+		neighbors = {"nether:rack_new"},
+		interval = 2,
+		chance = 3,
+		catch_up = false,
+		action = function(pos, node)
+			if node.param2 > 2 then return end
+
+			local node_above = minetest.get_node(vector.add(pos, {x=0,y=1,z=0}))
+			if not (not node_above or node_above.name == "air") then return end
+
+			local below_pos = vector.add(pos, {x=0,y=-1,z=0})
+			local node_below = minetest.get_node(below_pos)
+			if not (node_below and node_below.name == "nether:rack_new") then return end
+
+			if math.random() < 0.2 then
+				if math.random() < 0.2 then
+					minetest.set_node(pos, {name = "nether:fumarole"})
+				else
+					minetest.set_node(pos, {name = "nether:fumarole_slab"})
+				end
+				minetest.set_node(below_pos, {name = "nether:lava_source"})
+			else
+				minetest.set_node(pos, {name = "nether:rack_new"})
+			end
+			minetest.sound_play("default_cool_lava",
+				{pos = pos, max_hear_distance = 16, gain = 0.25}, true)
+		end,
+	})
+	minetest.register_abm({
+		label = "Deep Nether Lava cooling",
+		nodenames = {"default:lava_flowing"},
+		neighbors = {"nether:rack_deep"},
+		interval = 2,
+		chance = 3,
+		catch_up = false,
+		max_y = mapgen.ore_ceiling,
+		min_y = mapgen.ore_floor,
+		action = function(pos, node)
+			if node.param2 > 2 then return end
+
+			local node_above = minetest.get_node(vector.add(pos, {x=0,y=1,z=0}))
+			if not (not node_above or node_above.name == "air") then return end
+
+			local node_below = minetest.get_node(vector.add(pos, {x=0,y=-1,z=0}))
+			if not (node_below and node_below.name == "nether:rack_deep") then return end
+
+			minetest.set_node(pos, {name = "nether:rack_deep"})
+			minetest.sound_play("default_cool_lava",
+				{pos = pos, max_hear_distance = 16, gain = 0.25}, true)
+		end,
+	})
+end
 
 
 
+-- Crystals
 
 local function crystal(color, color_ratio, system_name, human_name_big, human_name_med)
 
@@ -517,12 +634,81 @@ local function crystal(color, color_ratio, system_name, human_name_big, human_na
 	})
 end
 
-crystal('#a85300', 128, "nether", S("Giant Nether Crystal"), S("Nether Crystal"))
+crystal('#000000', 200, "shadow", S("Giant Shadow Crystal"), S("Shadow Crystal"))
+crystal('#ffffff', 100, "life", S("Giant Life Crystal"), S("Life Crystal"))
+crystal('#7a0101', 128, "nether", S("Giant Nether Crystal"), S("Nether Crystal"))
+crystal('#1ecfeb', 128, "deep_nether", S("Giant Deep Nether Crystal"), S("Deep Nether Crystal"))
+
+
+local _  = {name = "air",                             prob = 0}
+local C  = {name = "nether:nether_crystal_big",       prob = 220, force_place=true}
+local C1 = {name = "nether:nether_crystal_big_30",    prob = 220, force_place=true, param2 = 0}
+local C2 = {name = "nether:nether_crystal_big_30_45", prob = 220, force_place=true, param2 = 1}
+local C3 = {name = "nether:nether_crystal_big_30",    prob = 220, force_place=true, param2 = 1}
+local C4 = {name = "nether:nether_crystal_big_30_45", prob = 220, force_place=true, param2 = 2}
+local C5 = {name = "nether:nether_crystal_big_30",    prob = 220, force_place=true, param2 = 2}
+local C6 = {name = "nether:nether_crystal_big_30_45", prob = 220, force_place=true, param2 = 3}
+local C7 = {name = "nether:nether_crystal_big_30",    prob = 220, force_place=true, param2 = 3}
+local C8 = {name = "nether:nether_crystal_big_30_45", prob = 220, force_place=true, param2 = 0}
+local N  = {name = "nether:rack_new",                 prob = 255}
+local schematic_Short_NetherCrystalCluster = {
+	size = {x = 3, y = 3, z = 3},
+	data = { -- note that data is upside down
+
+		_,  N,  _,
+		_, C1,  _,
+		_,  _,  _,
+
+		 N, N,  N,
+		C3, N, C7,
+		 _, C,  _,
+
+		_,  N,  _,
+		_, C5,  _,
+		_,  _,  _,
+	},
+	yslice_prob = {
+	}
+}
+local schematic_Tall_NetherCrystalCluster = {
+	size = {x = 5, y = 4, z = 5},
+	data = { -- note that data is upside down
+		_,  N,  N,  N, _,
+		_, C2, C1, C8, _,
+		_,  _,  _,  _, _,
+		_,  _,  _,  _, _,
+
+		N,  N,  N,  N, N,
+		C2, C2, N, C8, C8,
+		_,   _,C1,  _,  _,
+		_,   _, _,  _,  _,
+
+		N,  N,  N,  N, N,
+		C3, N, N,  N, C7,
+		_, C3, N, C7, _,
+		_,  _, C,  _, _,
+
+
+		N,  N,  N,  N, N,
+		C4, C4, N, C6, C6,
+		_, _,  C5,  _,  _,
+		_, _,   _,  _,  _,
+
+		_,  N,  N,  N, _,
+		_, C4, C5, C6, _,
+		_,  _,  _,  _, _,
+		_,  _,  _,  _, _,
+	},
+	yslice_prob = {
+	}
+}
+
+
 
 minetest.register_decoration({
-	name = "Nether Crystals",
+	name = "Single Nether Crystals",
 	deco_type = "simple",
-	place_on = {"nether:rack_new","nether:rack_deep"},
+	place_on = {"nether:rack_new"},
 	sidelen = 4,
 	fill_ratio = 0.0003,
 	biomes = {"nether_caverns"},
@@ -530,8 +716,179 @@ minetest.register_decoration({
 	y_min = mapgen.ore_floor,
 	param2 = 0,
 	param2_max = 3,
+	flags = "place_center_x,place_center_z,force_placement,all_floors",
 	decoration = {
 		"nether:nether_crystal_big","nether:nether_crystal_big_30","nether:nether_crystal_big_30_45",
 		"nether:nether_crystal_med","nether:nether_crystal_med_30","nether:nether_crystal_med_30_45"
+	},
+})
+
+minetest.register_decoration({
+	name = "Tall Big Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new"},
+	sidelen = 10,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Tall_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0
+})
+
+minetest.register_decoration({
+	name = "Short Big Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new"},
+	sidelen = 10,
+	fill_ratio = 0.0001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Short_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0
+})
+
+minetest.register_decoration({
+	name = "Tall Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new"},
+	sidelen = 10,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Tall_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	replacements = {
+		["nether:nether_crystal_big"]="nether:nether_crystal_med",
+		["nether:nether_crystal_big_30"]="nether:nether_crystal_med_30",
+		["nether:nether_crystal_big_30_45"]="nether:nether_crystal_med_30_45"
+	},
+})
+
+minetest.register_decoration({
+	name = "Short Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new"},
+	sidelen = 10,
+	fill_ratio = 0.0001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Short_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	replacements = {
+		["nether:nether_crystal_big"]="nether:nether_crystal_med",
+		["nether:nether_crystal_big_30"]="nether:nether_crystal_med_30",
+		["nether:nether_crystal_big_30_45"]="nether:nether_crystal_med_30_45"
+	},
+})
+
+
+
+
+
+minetest.register_decoration({
+	name = "Single Deep Nether Crystals",
+	deco_type = "simple",
+	place_on = {"nether:rack_deep"},
+	sidelen = 4,
+	fill_ratio = 0.0003,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	param2 = 0,
+	param2_max = 3,
+	flags = "place_center_x,place_center_z,force_placement,all_floors",
+	decoration = {
+		"nether:deep_nether_crystal_big","deep_nether:nether_crystal_big_30","deep_nether:nether_crystal_big_30_45",
+		"nether:deep_nether_crystal_med","deep_nether:nether_crystal_med_30","deep_nether:nether_crystal_med_30_45"
+	},
+})
+
+
+
+minetest.register_decoration({
+	name = "Tall Big Deep Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_deep"},
+	sidelen = 10,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Tall_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	replacements = {
+		["nether:rack_new"]="nether:rack_deep",
+		["nether:nether_crystal_big"]="nether:deep_nether_crystal_big",
+		["nether:nether_crystal_big_30"]="nether:deep_nether_crystal_big_30",
+		["nether:nether_crystal_big_30_45"]="nether:deep_nether_crystal_big_30_45"
+	},
+})
+
+minetest.register_decoration({
+	name = "Short Big Deep Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_deep"},
+	sidelen = 10,
+	fill_ratio = 0.0001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Short_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	replacements = {
+		["nether:rack_new"]="nether:rack_deep",
+		["nether:nether_crystal_big"]="nether:deep_nether_crystal_big",
+		["nether:nether_crystal_big_30"]="nether:deep_nether_crystal_big_30",
+		["nether:nether_crystal_big_30_45"]="nether:deep_nether_crystal_big_30_45"
+	},
+})
+
+minetest.register_decoration({
+	name = "Tall Deep Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_deep"},
+	sidelen = 10,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Tall_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	replacements = {
+		["nether:rack_new"]="nether:rack_deep",
+		["nether:nether_crystal_big"]="nether:deep_nether_crystal_med",
+		["nether:nether_crystal_big_30"]="nether:deep_nether_crystal_med_30",
+		["nether:nether_crystal_big_30_45"]="nether:deep_nether_crystal_med_30_45"
+	},
+})
+
+minetest.register_decoration({
+	name = "Short Deep Nether Crystal Clusters",
+	deco_type = "schematic",
+	place_on = {"nether:rack_deep"},
+	sidelen = 10,
+	fill_ratio = 0.0001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = schematic_Short_NetherCrystalCluster,
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	replacements = {
+		["nether:rack_new"]="nether:rack_deep",
+		["nether:nether_crystal_big"]="nether:deep_nether_crystal_med",
+		["nether:nether_crystal_big_30"]="nether:deep_nether_crystal_med_30",
+		["nether:nether_crystal_big_30_45"]="nether:deep_nether_crystal_med_30_45"
 	},
 })
