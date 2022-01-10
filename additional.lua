@@ -1,4 +1,5 @@
 local modname = minetest.get_current_modname()
+local modpath = minetest.get_modpath(modname) .. "/"
 local S = minetest.get_translator(modname)
 
 minetest.register_node("nether:gold_ore", {
@@ -199,6 +200,253 @@ minetest.register_node("nether:large_tooth", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.4, 0.25, 1.5, 0.4},
 	},
+})
+
+
+-- New decorations
+
+
+minetest.register_decoration({
+	name = "Nether Large Spine",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-large-1-spine.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-2,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Large Tail",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-large-1-tail.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=0,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Large Skull",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-large-1-skull.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-3,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Big Skull",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-big-1-skull.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-2,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Large Ribcage",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-large-1-ribcage.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-5,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Huge Ribcage",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-ribcage-huge-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-8,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Big Ribcage",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-big-1-ribcage.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-3,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Small Dinosaur",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-small-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-6,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Big Dinosaur",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.000001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-big-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-11,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Large Dinosaur",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new","nether:rack_deep","bls:marble","default:coral_skeleton"},
+	sidelen = 16,
+	fill_ratio = 0.000001,
+	biomes = {"nether_caverns","nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-skeleton-dinosaur-large-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-7,
+	rotation = "random"
+})
+
+
+minetest.register_decoration({
+	name = "Nether Graveyard Fungus",
+	deco_type = "schematic",
+	place_on = {"bls:marble","default:coral_skeleton"},
+	sidelen = 4,
+	fill_ratio = 0.008,
+	biomes = {"nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-fungus-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=1,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Graveyard Toadstool",
+	deco_type = "schematic",
+	place_on = {"bls:marble","default:coral_skeleton"},
+	sidelen = 4,
+	fill_ratio = 0.001,
+	biomes = {"nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-toadstool-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=1,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Graveyard Tooth",
+	deco_type = "simple",
+	place_on = {"bls:marble"},
+	sidelen = 4,
+	fill_ratio = 0.001,
+	biomes = {"nether_graveyard"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	flags = "place_center_x,place_center_z,all_floors",
+	decoration = { "nether:large_tooth", "nether:small_tooth" },
+	place_offset_y=1,
+	rotation = "random"
+})
+
+
+
+minetest.register_decoration({
+	name = "Nether Castle",
+	deco_type = "schematic",
+	place_on = {"nether:rack_new"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-castle-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-8,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Hut",
+	deco_type = "schematic",
+	place_on = {"nether:rack_deep"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_caverns"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-hut-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-4,
+	rotation = "random"
+})
+
+minetest.register_decoration({
+	name = "Nether Temple",
+	deco_type = "schematic",
+	place_on = {"nether:blackstone"},
+	sidelen = 16,
+	fill_ratio = 0.00001,
+	biomes = {"nether_shadows"},
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor,
+	schematic = dofile(modpath..'schematics/new_nether-temple-1.lua'),
+	flags = "place_center_x,place_center_z,all_floors",
+	place_offset_y=-7,
+	rotation = "random"
 })
 
 

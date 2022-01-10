@@ -322,6 +322,17 @@ minetest.register_ore({
 })
 
 minetest.register_ore({
+	ore_type       = "blob",
+	ore            = "nether:rack",
+	wherein        = {"nether:rack_new","nether:lava_crust","nether:lava_source"},
+	clust_scarcity = 13 * 13 * 13,
+	clust_num_ores = 80,
+	clust_size     = 7,
+	y_max = mapgen.ore_ceiling,
+	y_min = mapgen.ore_floor
+})
+
+minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "nether:magma_hot",
 	wherein        = {"nether:rack_new","nether:rack_deep"},
@@ -342,9 +353,6 @@ minetest.register_ore({
 	y_max = mapgen.ore_ceiling,
 	y_min = mapgen.ore_floor
 })
-
-
-
 
 
 
