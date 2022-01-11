@@ -101,7 +101,7 @@ Call these functions only at load time:
       the item occurs if a portal is not ignited.
 * `nether.register_wormhole_node(name, nodedef_overrides)`
     * Can be used to register wormhole nodes with a different post_effect_color
-      from the "nether:portal" node. "Post effect color" is the tint the world
+      from the "nether:portal_new" node. "Post effect color" is the tint the world
       takes on when you are standing inside a portal. `post_effect_color` is the
       only key/value that is needed in the nodedef_overrides table to achieve that,
       but the function allows any nodedef key/value to be specified/overridden.
@@ -139,12 +139,12 @@ Used by `nether.register_portal`.
         --     nether.PortalShape_Platform
         -- New shapes can be created, but are beyond the scope of this guide.
 
-        wormhole_node_name  = "nether:portal",
+        wormhole_node_name  = "nether:portal_new",
         -- Optional. Allows a custom wormhole node to be specified.
         -- Useful if you want the portals to have a different post_effect_color
         -- or texture.
         -- The Nether mod provides:
-        --     "nether:portal" (default)
+        --     "nether:portal_new" (default)
         --     "nether:portal_alt"
 
         wormhole_node_color = 0,

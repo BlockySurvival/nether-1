@@ -31,7 +31,7 @@ minetest.set_gen_notify({dungeon = true})
 -- Content ids
 
 local c_air              = minetest.get_content_id("air")
-local c_netherrack       = minetest.get_content_id("nether:rack")
+local c_netherrack       = minetest.get_content_id("nether:rack_new")
 local c_netherrack_deep  = minetest.get_content_id("nether:rack_deep")
 local c_dungeonbrick     = minetest.get_content_id("nether:brick")
 local c_dungeonbrick_alt = minetest.get_content_id("nether:brick_cracked")

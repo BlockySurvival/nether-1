@@ -167,7 +167,7 @@ mapgen.shift_existing_biomes(NETHER_FLOOR, NETHER_CEILING)
 
 -- nether:native_mapgen is used to prevent ores and decorations being generated according
 -- to landforms created by the native mapgen.
--- Ores and decorations can be registered against "nether:rack" instead, and the lua
+-- Ores and decorations can be registered against "nether:rack_new" instead, and the lua
 -- on_generate() callback will carve the Nether with nether:rack before invoking
 -- generate_decorations and generate_ores.
 minetest.register_node("nether:native_mapgen", {})
@@ -202,7 +202,7 @@ dofile(nether.path .. "/mapgen_decorations.lua")
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "nether:glowstone",
-	wherein        = "nether:rack",
+	wherein        = "nether:rack_new",
 	clust_scarcity = 11 * 11 * 11,
 	clust_num_ores = 3,
 	clust_size     = 2,
@@ -224,7 +224,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "default:lava_source",
-	wherein        = {"nether:rack", "nether:rack_deep"},
+	wherein        = {"nether:rack_new", "nether:rack_deep"},
 	clust_scarcity = 36 * 36 * 36,
 	clust_num_ores = 4,
 	clust_size     = 2,
@@ -235,7 +235,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type        = "blob",
 	ore             = "nether:sand",
-	wherein         = "nether:rack",
+	wherein         = "nether:rack_new",
 	clust_scarcity  = 14 * 14 * 14,
 	clust_size      = 8,
 	y_max = mapgen.ore_ceiling,
@@ -281,11 +281,12 @@ local dbuf = {}
 -- Content ids
 
 local c_air              = minetest.get_content_id("air")
-local c_netherrack       = minetest.get_content_id("nether:rack")
+local c_netherrack       = minetest.get_content_id("nether:rack_new")
 local c_netherrack_deep  = minetest.get_content_id("nether:rack_deep")
 local c_lavasea_source   = minetest.get_content_id("nether:lava_source") -- same as lava but with staggered animation to look better as an ocean
 local c_lava_crust       = minetest.get_content_id("nether:lava_crust")
 local c_native_mapgen    = minetest.get_content_id("nether:native_mapgen")
+local c_bedrock          = minetest.get_content_id("nether:bedrock")
 
 
 
@@ -327,7 +328,6 @@ local tunnelCandidate_count = 0
 local tunnel_count = 0
 local total_chunk_count = 0
 local function on_generated(minp, maxp, seed)
-
 	if minp.y > NETHER_CEILING or maxp.y < NETHER_FLOOR then
 		return
 	end
@@ -379,7 +379,9 @@ local function on_generated(minp, maxp, seed)
 
 				local cave_noise = nvals_cave[ni]
 
-				if cave_noise > tcave then
+				if y == NETHER_CEILING then
+					data[vi] = c_bedrock
+				elseif cave_noise > tcave then
 					-- Prime region
 					-- This was the only region in initial versions of the Nether mod.
 					-- It is the only region which portals from the surface will open into.

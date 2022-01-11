@@ -33,7 +33,7 @@ local decoration_floor   = nether.DEPTH_FLOOR   + 128
 local _  = {name = "air",                     prob = 0}
 local A  = {name = "air",                     prob = 255, force_place = true}
 local G  = {name = "nether:glowstone",        prob = 255, force_place = true}
-local N  = {name = "nether:rack",             prob = 255}
+local N  = {name = "nether:rack_new",         prob = 255}
 local D  = {name = "nether:rack_deep",        prob = 255}
 local S  = {name = "nether:sand",             prob = 255, force_place = true}
 local L  = {name = "default:lava_source",     prob = 255, force_place = true}
@@ -47,6 +47,7 @@ local S1 = {name = "stairs:stair_netherrack", prob = 255, force_place = true, pa
 local S2 = {name = "stairs:stair_netherrack", prob = 255, force_place = true, param2 = 7}
 local S3 = {name = "stairs:stair_netherrack", prob = 255, force_place = true, param2 = 12}
 local S4 = {name = "stairs:stair_netherrack", prob = 255, force_place = true, param2 = 16}
+
 
 
 -- =================
@@ -127,7 +128,7 @@ local schematic_GlowstoneStalactite = {
 minetest.register_decoration({
     name = "Glowstone stalactite",
     deco_type = "schematic",
-    place_on = "nether:rack",
+    place_on = "nether:rack_new",
     sidelen = 80,
     fill_ratio = 0.0003,
     biomes = {"nether_caverns"},
@@ -141,14 +142,14 @@ minetest.register_decoration({
 minetest.register_decoration({
     name = "Netherrack stalactite",
     deco_type = "schematic",
-    place_on = "nether:rack",
+    place_on = "nether:rack_new",
     sidelen = 80,
     fill_ratio = 0.0008,
     biomes = {"nether_caverns"},
     y_max = decoration_ceiling,
     y_min = decoration_floor,
     schematic = schematic_GlowstoneStalactite,
-    replacements = {["nether:glowstone"] = "nether:rack"},
+    replacements = {["nether:glowstone"] = "nether:rack_new"},
     flags = "place_center_x,place_center_z,all_ceilings",
     place_offset_y=-3
 })
@@ -289,7 +290,7 @@ minetest.register_decoration({
     y_max = decoration_ceiling,
     y_min = decoration_floor,
     schematic = schematic_GlowstoneStalactite,
-    replacements = {["nether:rack"] = "nether:rack_deep", ["nether:glowstone"] = "nether:glowstone_deep"},
+    replacements = {["nether:rack_new"] = "nether:rack_deep", ["nether:glowstone"] = "nether:glowstone_deep"},
     flags = "place_center_x,place_center_z,force_placement,all_ceilings",
     place_offset_y=-3
 })
@@ -321,7 +322,7 @@ minetest.register_decoration({
     y_max = decoration_ceiling,
     y_min = decoration_floor,
     schematic = schematic_GlowstoneStalactite,
-    replacements = {["nether:rack"] = "nether:rack_deep", ["nether:glowstone"] = "nether:rack_deep"},
+    replacements = {["nether:rack_new"] = "nether:rack_deep", ["nether:glowstone"] = "nether:rack_deep"},
     flags = "place_center_x,place_center_z,force_placement,all_ceilings",
     place_offset_y=-3
 })
@@ -350,7 +351,7 @@ if allow_lava_decorations then
     minetest.register_decoration({
         name = "Weak trap",
         deco_type = "schematic",
-        place_on = "nether:rack",
+        place_on = "nether:rack_new",
         sidelen = 80,
         fill_ratio = 0.002,
         biomes = {"nether_caverns"},
@@ -392,7 +393,7 @@ if allow_lava_decorations then
                 _, _, _, _,
             }
         },
-        replacements = {["nether:glowstone"] = "nether:rack"},
+        replacements = {["nether:glowstone"] = "nether:rack_new"},
         flags = "place_center_x,place_center_z,force_placement, all_floors",
         place_offset_y=-6,
         rotation = "random"
@@ -452,7 +453,7 @@ local schematic_fumarole = {
 minetest.register_decoration({
     name = "Sunken nether fumarole",
     deco_type = "schematic",
-    place_on = {"nether:rack"},
+    place_on = {"nether:rack_new"},
     sidelen = 80,
     fill_ratio = 0.005,
     biomes = {"nether_caverns"},
@@ -481,7 +482,7 @@ fumarole_clump_noise.offset = fumarole_clump_noise_offset - 0.035
 minetest.register_decoration({
     name = "Raised Nether fumarole",
     deco_type = "schematic",
-    place_on = {"nether:rack"},
+    place_on = {"nether:rack_new"},
     sidelen = 8,
     noise_params = fumarole_clump_noise,
     biomes = {"nether_caverns"},
@@ -497,7 +498,7 @@ fumarole_clump_noise.offset = fumarole_clump_noise_offset
 minetest.register_decoration({
     name = "Half-raised Nether fumarole",
     deco_type = "schematic",
-    place_on = {"nether:rack"},
+    place_on = {"nether:rack_new"},
     sidelen = 8,
     noise_params = fumarole_clump_noise,
     biomes = {"nether_caverns"},
@@ -513,7 +514,7 @@ fumarole_clump_noise.offset = fumarole_clump_noise_offset - 0.035
 minetest.register_decoration({
     name = "Nether fumarole mound",
     deco_type = "schematic",
-    place_on = {"nether:rack"},
+    place_on = {"nether:rack_new"},
     sidelen = 8,
     noise_params = fumarole_clump_noise,
     biomes = {"nether_caverns"},
@@ -552,7 +553,7 @@ fumarole_clump_noise.offset = fumarole_clump_noise_offset - 0.01
 minetest.register_decoration({
     name = "Double Nether fumarole",
     deco_type = "schematic",
-    place_on = {"nether:rack"},
+    place_on = {"nether:rack_new"},
     sidelen = 8,
     noise_params = fumarole_clump_noise,
     biomes = {"nether_caverns"},

@@ -136,9 +136,12 @@ dofile(nether.path .. "/portal_api.lua")
 dofile(nether.path .. "/nodes.lua")
 dofile(nether.path .. "/tools.lua")
 dofile(nether.path .. "/crafts.lua")
+dofile(nether.path .. "/legacy.lua")
+dofile(nether.path .. "/additional.lua")
 if nether.NETHER_REALM_ENABLED then
 	if nether.useBiomes then
 		dofile(nether.path .. "/mapgen.lua")
+		dofile(nether.path .. "/mapgen_new.lua")
 	else
 		dofile(nether.path .. "/mapgen_nobiomes.lua")
 	end

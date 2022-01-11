@@ -160,7 +160,7 @@ minetest.register_craft({
 --===========================--
 
 nether.lightstaff_recipes = {
-	["nether:rack"]                 = "nether:glowstone",
+	["nether:rack_new"]                 = "nether:glowstone",
 	["nether:brick"]                = "nether:glowstone",
 	["nether:brick_cracked"]        = "nether:glowstone",
 	["nether:brick_compressed"]     = "nether:glowstone",
