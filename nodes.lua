@@ -507,28 +507,29 @@ nether.cool_lava = function(pos, node)
 		minetest.swap_node(pos_above, {name="air"})
 	end
 
+	-- Disable Lava-Particles, to reduce Terumet/Tubelib Factory Lag a lot
 	-- add steam to cooling lava
-	minetest.add_particlespawner({
-		amount = 20,
-		time = 0.15,
-		minpos = {x=pos.x - 0.4, y=pos.y - 0,   z=pos.z - 0.4},
-		maxpos = {x=pos.x + 0.4, y=pos.y + 0.5, z=pos.z + 0.4},
-		minvel = {x = -0.5, y = 0.5, z = -0.5},
-		maxvel = {x =  0.5, y = 1.5, z =  0.5},
-		minacc = {x = 0, y = 0.1, z = 0},
-		maxacc = {x = 0, y = 0.2, z = 0},
-		minexptime = 0.5,
-		maxexptime = 1.3,
-		minsize = 1.5,
-		maxsize = 3.5,
-		texture = "nether_particle_anim4.png",
-		animation = {
-			type = "vertical_frames",
-			aspect_w = 7,
-			aspect_h = 7,
-			length = 1.4,
-		}
-	})
+	-- minetest.add_particlespawner({
+		-- amount = 20,
+		-- time = 0.15,
+		-- minpos = {x=pos.x - 0.4, y=pos.y - 0,   z=pos.z - 0.4},
+		-- maxpos = {x=pos.x + 0.4, y=pos.y + 0.5, z=pos.z + 0.4},
+		-- minvel = {x = -0.5, y = 0.5, z = -0.5},
+		-- maxvel = {x =  0.5, y = 1.5, z =  0.5},
+		-- minacc = {x = 0, y = 0.1, z = 0},
+		-- maxacc = {x = 0, y = 0.2, z = 0},
+		-- minexptime = 0.5,
+		-- maxexptime = 1.3,
+		-- minsize = 1.5,
+		-- maxsize = 3.5,
+		-- texture = "nether_particle_anim4.png",
+		-- animation = {
+			-- type = "vertical_frames",
+			-- aspect_w = 7,
+			-- aspect_h = 7,
+			-- length = 1.4,
+		-- }
+	-- })
 
 	if node.name == "nether:lava_source" or node.name == "nether:lava_crust" then
 		-- use swap_node to avoid triggering the lava_crust's after_destruct
